@@ -4,7 +4,11 @@
 #include "../cr.h"
 #include "test_data.h"
 
-#if defined(CR_PLATFORM_WIN) || defined(CR_PLATFORM_LINUX)
+#if defined(CR_WINDOWS) || defined(CR_LINUX)
+#if defined(_MSC_VER)
+// avoid experimental/filesystem deprecation #error on newer MSVC
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#endif
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
